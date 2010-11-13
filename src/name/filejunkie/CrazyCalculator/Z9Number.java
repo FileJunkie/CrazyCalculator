@@ -1,8 +1,9 @@
 package name.filejunkie.CrazyCalculator;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedList;
-import java.util.List;
+import java.util.Set;
 
 public class Z9Number {
 	private int value;
@@ -82,14 +83,14 @@ public class Z9Number {
 		
 	}
 
-	public List<Z9Number> add(Z9Number e){
+	public Set<Integer> add(Z9Number e){
 		return this.add(e.getValue());
 	}
 
-	public List<Z9Number> add(int b) {
+	public Set<Integer> add(int b) {
 		int a = this.getValue();
 		
-		List<Z9Number> list = new LinkedList<Z9Number>();
+		Set<Integer> set = new HashSet<Integer>();
 		
 		if(a > b){
 			int c = a;
@@ -98,10 +99,10 @@ public class Z9Number {
 		}
 		
 		for(int i: answers.get(a).get(b)){
-			list.add(new Z9Number(i));
+			set.add(i);
 		}
 		
-		return list;		
+		return set;		
 	}
 	
 	public void setValue(int value) {

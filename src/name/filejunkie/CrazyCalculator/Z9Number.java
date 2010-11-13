@@ -76,6 +76,12 @@ public class Z9Number {
 			answers.get(7).get(8).add(6); answers.get(7).get(8).add(8);
 			
 			answers.get(8).get(8).add(6); answers.get(8).get(8).add(8);
+			
+			for(int i = 1; i < 9; i++){
+				for(int j = 0; j < i; j++){
+					answers.get(i).get(j).addAll(answers.get(j).get(i));
+				}
+			}
 		}
 		
 		this.setValue(value);
@@ -83,26 +89,34 @@ public class Z9Number {
 		
 	}
 
-	public Set<Integer> add(Z9Number e){
-		return this.add(e.getValue());
-	}
-
 	public Set<Integer> add(int b) {
 		int a = this.getValue();
 		
 		Set<Integer> set = new HashSet<Integer>();
 		
-		if(a > b){
-			int c = a;
-			a = b;
-			b = c;
-		}
-		
 		for(int i: answers.get(a).get(b)){
 			set.add(i);
 		}
 		
-		return set;		
+		return set;
+	}
+	
+	public Set<Integer> sub(int b){
+		int a = this.getValue();
+		
+		Set<Integer> set = new HashSet<Integer>();
+		
+		for(int i = 0; i < 9; i++){
+			if(answers.get(i).get(b).contains(a)){
+				set.add(i);
+			}
+		}
+		
+		if(set.isEmpty()){
+			throw new IllegalArgumentException("Cannot substract " + b + " from " + a);
+		}
+		
+		return set;
 	}
 	
 	public void setValue(int value) {

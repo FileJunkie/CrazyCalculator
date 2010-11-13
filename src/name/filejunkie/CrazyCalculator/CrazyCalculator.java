@@ -28,6 +28,18 @@ public class CrazyCalculator {
 					}
 					stack.push(res);
 				}
+				else if(token.equals("-")){
+					HashSet<Integer> b = stack.pop();
+					HashSet<Integer> a = stack.pop();
+					HashSet<Integer> res = new HashSet<Integer>();
+
+					for(int i: a){
+						for(int j: b){
+							res.addAll(new Z9Number(i).sub(j));
+						}
+					}
+					stack.push(res);
+				}
 				else{
 					int val = Integer.parseInt(token);
 					if(val < 0 || val > 8){

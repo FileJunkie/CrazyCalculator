@@ -5,16 +5,11 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Set;
 
-public class Z9Number {
-	private int value;
+public class Z9Digit {
 	private static ArrayList<ArrayList<LinkedList<Integer>>> addAnswers = null;
 	private static ArrayList<ArrayList<LinkedList<Integer>>> mulAnswers = null;
 	
-	public Z9Number(int value) {
-		if(value < 0 || value > 8){
-			throw new IllegalArgumentException();
-		}
-		
+	static {
 		if(addAnswers == null){
 			addAnswers = new ArrayList<ArrayList<LinkedList<Integer>>>();
 			for(int i = 0; i < 9; i++){
@@ -138,13 +133,9 @@ public class Z9Number {
 			}
 		}
 		
-		this.setValue(value);
-		
-		
 	}
 
-	public Set<Integer> add(int b) {
-		int a = this.getValue();
+	public static Set<Integer> add(int a, int b) {
 		
 		Set<Integer> set = new HashSet<Integer>();
 		
@@ -155,8 +146,7 @@ public class Z9Number {
 		return set;
 	}
 	
-	public Set<Integer> sub(int b){
-		int a = this.getValue();
+	public static Set<Integer> sub(int a, int b){
 		
 		Set<Integer> set = new HashSet<Integer>();
 		
@@ -173,8 +163,7 @@ public class Z9Number {
 		return set;
 	}
 
-	public Set<Integer> mul(int b){
-		int a = this.getValue();
+	public static Set<Integer> mul(int a, int b){
 		
 		Set<Integer> set = new HashSet<Integer>();
 		
@@ -185,8 +174,7 @@ public class Z9Number {
 		return set;
 	}
 	
-	public Set<Integer> div(int b){
-		int a = this.getValue();
+	public static Set<Integer> div(int a, int b){
 		
 		Set<Integer> set = new HashSet<Integer>();
 		
@@ -203,16 +191,5 @@ public class Z9Number {
 		return set;
 	}
 	
-	public void setValue(int value) {
-		this.value = value;
-	}
-
-	public int getValue() {
-		return value;
-	}
-	
-	public String toString(){
-		return String.valueOf(value);
-	}
 
 }

@@ -8,7 +8,7 @@ public class CrazyCalculator {
 
 	public static void main(String[] args) {
 		Stack<HashSet<Integer>> stack = new Stack<HashSet<Integer>>();
-
+		
 		System.out.println("Enter RPN expression");
 		Scanner in = new Scanner(System.in);
 
@@ -23,7 +23,7 @@ public class CrazyCalculator {
 
 					for(int i: a){
 						for(int j: b){
-							res.addAll(new Z9Number(i).add(j));
+							res.addAll(Z9Digit.add(i, j));
 						}
 					}
 					stack.push(res);
@@ -35,7 +35,7 @@ public class CrazyCalculator {
 
 					for(int i: a){
 						for(int j: b){
-							res.addAll(new Z9Number(i).sub(j));
+							res.addAll(Z9Digit.sub(i,j));
 						}
 					}
 					stack.push(res);
@@ -46,7 +46,7 @@ public class CrazyCalculator {
 
 					for(int i: a){
 						for(int j: b){
-							res.addAll(new Z9Number(i).mul(j));
+							res.addAll(Z9Digit.mul(i,j));
 						}
 					}
 					stack.push(res);
@@ -58,7 +58,7 @@ public class CrazyCalculator {
 
 					for(int i: a){
 						for(int j: b){
-							res.addAll(new Z9Number(i).div(j));
+							res.addAll(Z9Digit.div(i,j));
 						}
 					}
 					stack.push(res);

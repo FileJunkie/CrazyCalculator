@@ -136,6 +136,9 @@ public class Z9Digit {
 	}
 
 	public static Set<Integer> add(int a, int b) {
+		if(a < 0 || a > 8 || b < 0 || b > 8){
+			throw new IllegalArgumentException();
+		}
 		
 		Set<Integer> set = new HashSet<Integer>();
 		
@@ -147,6 +150,9 @@ public class Z9Digit {
 	}
 	
 	public static Set<Integer> sub(int a, int b){
+		if(a < 0 || a > 8 || b < 0 || b > 8){
+			throw new IllegalArgumentException();
+		}
 		
 		Set<Integer> set = new HashSet<Integer>();
 		
@@ -164,6 +170,9 @@ public class Z9Digit {
 	}
 
 	public static Set<Integer> mul(int a, int b){
+		if(a < 0 || a > 8 || b < 0 || b > 8){
+			throw new IllegalArgumentException();
+		}
 		
 		Set<Integer> set = new HashSet<Integer>();
 		
@@ -175,6 +184,9 @@ public class Z9Digit {
 	}
 	
 	public static Set<Integer> div(int a, int b){
+		if(a < 0 || a > 8 || b < 0 || b > 8){
+			throw new IllegalArgumentException();
+		}
 		
 		Set<Integer> set = new HashSet<Integer>();
 		

@@ -31,13 +31,7 @@ public class Z9Number {
 	public Set<Z9Number> add(Z9Number b){
 		ArrayList<Integer> numb1 = (ArrayList<Integer>)this.number.clone();
 		ArrayList<Integer> numb2 = (ArrayList<Integer>)b.number.clone();
-		while(numb1.size() > numb2.size()){
-			numb2.add(0);
-		}
-		while(numb1.size() < numb2.size()){
-			numb1.add(0);
-		}
-	
+			
 		Set<ArrayList<Integer>> results = Z9Number.add(numb1, numb2);
 		Set<Z9Number> result = new HashSet<Z9Number>();
 		for(ArrayList<Integer> res: results){
@@ -50,7 +44,14 @@ public class Z9Number {
 	}
 
 	@SuppressWarnings("unchecked")
-	private static Set<ArrayList<Integer>> add(ArrayList<Integer> number1, ArrayList<Integer> number2){		
+	private static Set<ArrayList<Integer>> add(ArrayList<Integer> number1, ArrayList<Integer> number2){
+		while(number1.size() > number2.size()){
+			number2.add(0);
+		}
+		while(number1.size() < number2.size()){
+			number1.add(0);
+		}
+		
 		Integer digit1 = number1.get(0);
 		Integer digit2 = number2.get(0);
 		Set<Integer> resDigits = Z9Digit.add(digit1, digit2);

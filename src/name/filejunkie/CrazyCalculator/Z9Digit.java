@@ -33,14 +33,14 @@ public class Z9Digit {
 			addAnswers.get(1).get(8).add(8);
 			
 			addAnswers.get(2).get(2).add(2); addAnswers.get(2).get(2).add(3); addAnswers.get(2).get(2).add(7);
-			addAnswers.get(2).get(3).add(3); addAnswers.get(2).get(3).add(7); addAnswers.get(2).get(3).add(2);
+			addAnswers.get(2).get(3).add(2); addAnswers.get(2).get(3).add(3); addAnswers.get(2).get(3).add(7);
 			addAnswers.get(2).get(4).add(3);
 			addAnswers.get(2).get(5).add(3);
 			addAnswers.get(2).get(6).add(6); addAnswers.get(2).get(6).add(8);
-			addAnswers.get(2).get(7).add(7); addAnswers.get(2).get(7).add(2); addAnswers.get(2).get(7).add(3);
+			addAnswers.get(2).get(7).add(2); addAnswers.get(2).get(7).add(3); addAnswers.get(2).get(7).add(7);
 			addAnswers.get(2).get(8).add(6); addAnswers.get(2).get(8).add(8);
 			
-			addAnswers.get(3).get(3).add(7); addAnswers.get(3).get(3).add(2); addAnswers.get(3).get(3).add(3);
+			addAnswers.get(3).get(3).add(2); addAnswers.get(3).get(3).add(3); addAnswers.get(3).get(3).add(7);
 			addAnswers.get(3).get(4).add(7);
 			addAnswers.get(3).get(5).add(7); 
 			addAnswers.get(3).get(6).add(6); addAnswers.get(3).get(6).add(8); 
@@ -62,7 +62,7 @@ public class Z9Digit {
 			addAnswers.get(6).get(7).add(6); addAnswers.get(6).get(7).add(8);
 			addAnswers.get(6).get(8).add(6); addAnswers.get(6).get(8).add(8);
 			
-			addAnswers.get(7).get(7).add(3); addAnswers.get(7).get(7).add(7); addAnswers.get(7).get(7).add(2);
+			addAnswers.get(7).get(7).add(2); addAnswers.get(7).get(7).add(3); addAnswers.get(7).get(7).add(7);
 			addAnswers.get(7).get(8).add(6); addAnswers.get(7).get(8).add(8);
 			
 			addAnswers.get(8).get(8).add(6); addAnswers.get(8).get(8).add(8);

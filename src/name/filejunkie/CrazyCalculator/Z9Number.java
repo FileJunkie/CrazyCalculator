@@ -7,6 +7,31 @@ import java.util.Set;
 public class Z9Number {
 	private ArrayList<Integer> number = null;
 	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((number == null) ? 0 : number.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Z9Number other = (Z9Number) obj;
+		if (number == null) {
+			if (other.number != null)
+				return false;
+		} else if (!number.equals(other.number))
+			return false;
+		return true;
+	}
+
 	public Z9Number(int a){
 		if(a < 0){
 			throw new IllegalArgumentException();
@@ -35,7 +60,7 @@ public class Z9Number {
 		Set<ArrayList<Integer>> results = Z9Number.add(numb1, numb2);
 		Set<Z9Number> result = new HashSet<Z9Number>();
 		for(ArrayList<Integer> a: results){
-			for(int i = a.size() - 1; a.get(i) != 0 && i != 0; i--){
+			for(int i = a.size() - 1; a.get(i) == 0 && i != 0; i--){
 				a.remove(i);
 			}
 		}
@@ -55,7 +80,7 @@ public class Z9Number {
 			
 		Set<ArrayList<Integer>> results = Z9Number.sub(numb1, numb2);
 		for(ArrayList<Integer> a: results){
-			for(int i = a.size() - 1; a.get(i) != 0 && i != 0; i--){
+			for(int i = a.size() - 1; a.get(i) == 0 && i != 0; i--){
 				a.remove(i);
 			}
 		}

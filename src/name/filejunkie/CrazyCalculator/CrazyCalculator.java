@@ -39,7 +39,7 @@ public class CrazyCalculator {
 						}
 					}
 					stack.push(res);
-				}/* else if(token.equals("*")){
+				} else if(token.equals("*")){
 					HashSet<Z9Number> b = stack.pop();
 					HashSet<Z9Number> a = stack.pop();
 					HashSet<Z9Number> res = new HashSet<Z9Number>();
@@ -50,7 +50,7 @@ public class CrazyCalculator {
 						}
 					}
 					stack.push(res);
-				}
+				}/*
 				else if(token.equals("/")){
 					HashSet<Z9Number> b = stack.pop();
 					HashSet<Z9Number> a = stack.pop();

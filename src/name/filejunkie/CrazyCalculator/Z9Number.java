@@ -34,6 +34,11 @@ public class Z9Number {
 			
 		Set<ArrayList<Integer>> results = Z9Number.add(numb1, numb2);
 		Set<Z9Number> result = new HashSet<Z9Number>();
+		for(ArrayList<Integer> a: results){
+			for(int i = a.size() - 1; a.get(i) != 0 && i != 0; i--){
+				a.remove(i);
+			}
+		}
 		for(ArrayList<Integer> res: results){
 			Z9Number r = new Z9Number(0);
 			r.number = res;
@@ -49,6 +54,11 @@ public class Z9Number {
 		ArrayList<Integer> numb2 = (ArrayList<Integer>)b.number.clone();
 			
 		Set<ArrayList<Integer>> results = Z9Number.sub(numb1, numb2);
+		for(ArrayList<Integer> a: results){
+			for(int i = a.size() - 1; a.get(i) != 0 && i != 0; i--){
+				a.remove(i);
+			}
+		}
 		Set<Z9Number> result = new HashSet<Z9Number>();
 		for(ArrayList<Integer> res: results){
 			Z9Number r = new Z9Number(0);

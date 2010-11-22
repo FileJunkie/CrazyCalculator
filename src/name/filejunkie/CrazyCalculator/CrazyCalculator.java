@@ -7,7 +7,7 @@ import java.util.Stack;
 public class CrazyCalculator {
 
 	public static void main(String[] args) {
-		Stack<HashSet<Integer>> stack = new Stack<HashSet<Integer>>();
+		Stack<HashSet<Z9Number>> stack = new Stack<HashSet<Z9Number>>();
 		
 		System.out.println("Enter RPN expression");
 		Scanner in = new Scanner(System.in);
@@ -17,63 +17,60 @@ public class CrazyCalculator {
 			String[] array = input.split(" ");
 			for(String token: array){
 				if(token.equals("+")){
-					HashSet<Integer> a = stack.pop();
-					HashSet<Integer> b = stack.pop();
-					HashSet<Integer> res = new HashSet<Integer>();
+					HashSet<Z9Number> a = stack.pop();
+					HashSet<Z9Number> b = stack.pop();
+					HashSet<Z9Number> res = new HashSet<Z9Number>();
 
-					for(int i: a){
-						for(int j: b){
-							res.addAll(Z9Digit.add(i, j));
+					for(Z9Number i: a){
+						for(Z9Number j: b){
+							res.addAll(i.add(j));
 						}
 					}
 					stack.push(res);
 				}
 				else if(token.equals("-")){
-					HashSet<Integer> b = stack.pop();
-					HashSet<Integer> a = stack.pop();
-					HashSet<Integer> res = new HashSet<Integer>();
+					HashSet<Z9Number> b = stack.pop();
+					HashSet<Z9Number> a = stack.pop();
+					HashSet<Z9Number> res = new HashSet<Z9Number>();
 
-					for(int i: a){
-						for(int j: b){
-							res.addAll(Z9Digit.sub(i,j));
+					for(Z9Number i: a){
+						for(Z9Number j: b){
+							res.addAll(i.sub(j));
 						}
 					}
 					stack.push(res);
-				} else if(token.equals("*")){
-					HashSet<Integer> b = stack.pop();
-					HashSet<Integer> a = stack.pop();
-					HashSet<Integer> res = new HashSet<Integer>();
+				}/* else if(token.equals("*")){
+					HashSet<Z9Number> b = stack.pop();
+					HashSet<Z9Number> a = stack.pop();
+					HashSet<Z9Number> res = new HashSet<Z9Number>();
 
-					for(int i: a){
-						for(int j: b){
-							res.addAll(Z9Digit.mul(i,j));
+					for(Z9Number i: a){
+						for(Z9Number j: b){
+							res.addAll(i.mul(j));
 						}
 					}
 					stack.push(res);
 				}
 				else if(token.equals("/")){
-					HashSet<Integer> b = stack.pop();
-					HashSet<Integer> a = stack.pop();
-					HashSet<Integer> res = new HashSet<Integer>();
+					HashSet<Z9Number> b = stack.pop();
+					HashSet<Z9Number> a = stack.pop();
+					HashSet<Z9Number> res = new HashSet<Z9Number>();
 
-					for(int i: a){
-						for(int j: b){
-							res.addAll(Z9Digit.div(i,j));
+					for(Z9Number i: a){
+						for(Z9Number j: b){
+							res.addAll(i.div(j));
 						}
 					}
 					stack.push(res);
-				}
+				}*/
 				else{
 					int val = Integer.parseInt(token);
-					if(val < 0 || val > 8){
-						throw new IllegalArgumentException();
-					}
-					HashSet<Integer> tmp = new HashSet<Integer>();
-					tmp.add(val);
+					HashSet<Z9Number> tmp = new HashSet<Z9Number>();
+					tmp.add(new Z9Number(val));
 					stack.push(tmp);
 				}
 			}
-			for(HashSet<Integer> i: stack){
+			for(HashSet<Z9Number> i: stack){
 				System.out.println(i);
 			}
 		}

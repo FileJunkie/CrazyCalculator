@@ -6,6 +6,7 @@ import java.util.Set;
 
 public class Z9Number {
 	private ArrayList<Integer> number = null;
+	final private int width = 3;
 	
 	@Override
 	public int hashCode() {
@@ -39,7 +40,7 @@ public class Z9Number {
 		number = new ArrayList<Integer>();
 		
 		int digit;
-		while(a != 0){
+		for(int i = 0; i < width && a != 0; i++){
 			digit = a % 10;
 			
 			if(digit > 8){
@@ -50,6 +51,7 @@ public class Z9Number {
 			
 			a /= 10;
 		}
+		
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -66,6 +68,9 @@ public class Z9Number {
 		}
 		for(ArrayList<Integer> res: results){
 			Z9Number r = new Z9Number(0);
+			while(res.size() > width){
+				res.remove(res.size() - 1);
+			}
 			r.number = res;
 			result.add(r);
 		}
@@ -87,6 +92,9 @@ public class Z9Number {
 		Set<Z9Number> result = new HashSet<Z9Number>();
 		for(ArrayList<Integer> res: results){
 			Z9Number r = new Z9Number(0);
+			while(res.size() > width){
+				res.remove(res.size() - 1);
+			}
 			r.number = res;
 			result.add(r);
 		}
@@ -116,7 +124,13 @@ public class Z9Number {
 		while(!parts.isEmpty()){
 			for(Z9Number c: parts.remove(0)){
 				for(Z9Number a: result){
-					tmp.addAll(a.add(c));
+					Set<Z9Number> tmp1 = a.add(c);
+					for(Z9Number d: tmp1){
+						while(d.number.size() > width){
+							d.number.remove(d.number.size() - 1);
+						}
+					}
+					tmp.addAll(tmp1);
 				}
 				result.clear();
 				result.addAll(tmp);

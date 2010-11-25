@@ -6,7 +6,7 @@ import java.util.Set;
 
 public class Z9Number {
 	private ArrayList<Integer> number = null;
-	final private int width = 3;
+	final private static int width = 3;
 	
 	@Override
 	public int hashCode() {
@@ -51,9 +51,23 @@ public class Z9Number {
 			
 			a /= 10;
 		}
+		if(number.isEmpty()){
+			number.add(0);
+		}
 		
 	}
 	
+	private Z9Number(ArrayList<Integer> numb) {
+		for(int i = numb.size() - 1; numb.get(i) == 0 && i != 0; i--){
+			numb.remove(i);
+		}
+		while(numb.size() > width){
+			numb.remove(numb.size() - 1);
+		}
+		this.number = numb;
+		
+	}
+
 	@SuppressWarnings("unchecked")
 	public Set<Z9Number> add(Z9Number b){
 		ArrayList<Integer> numb1 = (ArrayList<Integer>)this.number.clone();
@@ -129,6 +143,9 @@ public class Z9Number {
 						while(d.number.size() > width){
 							d.number.remove(d.number.size() - 1);
 						}
+						for(int i = d.number.size() - 1; d.number.get(i) == 0 && i != 0; i--){
+							d.number.remove(i);
+						}
 					}
 					tmp.addAll(tmp1);
 				}
@@ -142,38 +159,47 @@ public class Z9Number {
 		
 	}
 
-	private static Set<Z9Number> mul(ArrayList<Integer> numb1, Integer integer) {
-		Set<Z9Number> result = new HashSet<Z9Number>();
-		ArrayList<Set<Z9Number>> parts = new ArrayList<Set<Z9Number>>();
-		for(int i = 0; i < numb1.size(); i++){
-			parts.add(new HashSet<Z9Number>());
-			for(int r: Z9Digit.mul(numb1.get(i), integer)){
-				if(r < numb1.get(i) * integer){
-					r *= 10;
-				}
-				for(int j = 0; j < i; j++){
-					r *= 10;
-				}
-				parts.get(i).add(new Z9Number(r));
-				
-			}
-		}
-		result.addAll(parts.remove(0));
-		Set<Z9Number> tmp = new HashSet<Z9Number>();
-		while(!parts.isEmpty()){
-			for(Z9Number c: parts.remove(0)){
-				for(Z9Number a: result){
-					tmp.addAll(a.add(c));
-				}
-				result.clear();
-				result.addAll(tmp);
-				tmp.clear();
-			}
-		}
+	@SuppressWarnings("unchecked")
+	public Set<Z9Number> inv(){
+		Set<Z9Number> results = new HashSet<Z9Number>();
 		
-		return result;
+		ArrayList<Integer> numb = new ArrayList<Integer>();
+		for(int i = 0; i < width; i++){
+			numb.add(0);
+		}
+		do{
+			Z9Number candidate = new Z9Number((ArrayList<Integer>) numb.clone());
+			for(Z9Number res: this.mul(candidate)){
+				if(res.number.size() == 1 && res.number.get(0) == 1){
+					results.add(res);
+				}
+			}
+		}while(inc(numb));
+		
+		return results;
 	}
-
+	
+	private static boolean inc(ArrayList<Integer> array){
+		int pointer = 0;
+		boolean ready = true;
+		
+		do{
+			ready = true;
+			array.set(pointer, array.get(pointer) + 1);
+			if(array.get(pointer) == 9){
+				array.set(pointer, 0);
+				pointer++;
+				ready = false;
+			}
+		}while(!ready && pointer < width);
+		if(!ready && pointer >= width){
+			return false;
+		}
+		else{
+			return true;
+		}
+	}
+	
 	@SuppressWarnings("unchecked")
 	private static Set<ArrayList<Integer>> add(ArrayList<Integer> number1, ArrayList<Integer> number2){
 		while(number1.size() > number2.size()){
@@ -278,6 +304,38 @@ public class Z9Number {
 		}
 		
 		return resNumbers;
+	}
+	
+	private static Set<Z9Number> mul(ArrayList<Integer> numb1, Integer integer) {
+		Set<Z9Number> result = new HashSet<Z9Number>();
+		ArrayList<Set<Z9Number>> parts = new ArrayList<Set<Z9Number>>();
+		for(int i = 0; i < numb1.size(); i++){
+			parts.add(new HashSet<Z9Number>());
+			for(int r: Z9Digit.mul(numb1.get(i), integer)){
+				if(r < numb1.get(i) * integer){
+					r *= 10;
+				}
+				for(int j = 0; j < i; j++){
+					r *= 10;
+				}
+				parts.get(i).add(new Z9Number(r));
+				
+			}
+		}
+		result.addAll(parts.remove(0));
+		Set<Z9Number> tmp = new HashSet<Z9Number>();
+		while(!parts.isEmpty()){
+			for(Z9Number c: parts.remove(0)){
+				for(Z9Number a: result){
+					tmp.addAll(a.add(c));
+				}
+				result.clear();
+				result.addAll(tmp);
+				tmp.clear();
+			}
+		}
+		
+		return result;
 	}
 	
 	@Override

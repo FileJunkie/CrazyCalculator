@@ -63,6 +63,15 @@ public class CrazyCalculator {
 					}
 					stack.push(res);
 				}*/
+				else if(token.equals("inv")){
+					HashSet<Z9Number> a = stack.pop();
+					HashSet<Z9Number> res = new HashSet<Z9Number>();
+					
+					for(Z9Number i: a){
+						res.addAll(i.inv());
+					}
+					stack.push(res);
+				}
 				else{
 					int val = Integer.parseInt(token);
 					HashSet<Z9Number> tmp = new HashSet<Z9Number>();

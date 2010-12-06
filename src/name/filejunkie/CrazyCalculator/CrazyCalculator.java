@@ -63,6 +63,18 @@ public class CrazyCalculator {
 					}
 					stack.push(res);
 				}
+				else if(token.equals("gcd")){
+					HashSet<Z9Number> b = stack.pop();
+					HashSet<Z9Number> a = stack.pop();
+					HashSet<Z9Number> res = new HashSet<Z9Number>();
+
+					for(Z9Number i: a){
+						for(Z9Number j: b){
+							res.addAll(Z9Number.gcd(i, j));
+						}
+					}
+					stack.push(res);
+				}
 				else if(token.equals("inv")){
 					HashSet<Z9Number> a = stack.pop();
 					HashSet<Z9Number> res = new HashSet<Z9Number>();

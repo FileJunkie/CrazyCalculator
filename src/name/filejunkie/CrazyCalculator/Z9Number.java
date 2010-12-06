@@ -276,7 +276,7 @@ public class Z9Number {
 		for(int i = 0; i < numb1.size(); i++){
 			parts.add(new HashSet<Z9Number>());
 			for(int r: Z9Digit.mul(numb1.get(i), integer)){
-				if(addOverflow(numb1.get(i), integer)){
+				if(mulOverflow(numb1.get(i), integer)){
 					r *= 10;
 				}
 				for(int j = 0; j < i; j++){
@@ -325,5 +325,41 @@ public class Z9Number {
 			return true;
 		
 		return false;
+	}
+	private static boolean mulOverflow(int a, int b){
+		if( (a == 0) || (b == 0))
+			return false;
+		if( (a == 1) || (b == 1))
+			return false;
+		
+		if( (a == 6) || (b == 6))
+			return true;
+		if( (a == 8) || (b == 8))
+			return true;
+		if( (a == 4) || (b == 4))
+			return true;
+		if( (a == 7) || (b == 7))
+			return true;
+		
+		return false;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static Set<Z9Number> gcd(Z9Number a, Z9Number b){
+		Set<Z9Number> results = new HashSet<Z9Number>();
+		
+		ArrayList<Integer> numb = new ArrayList<Integer>();
+		for(int i = 0; i < width; i++){
+			numb.add(0);
+		}
+		do{
+			Z9Number candidate = new Z9Number((ArrayList<Integer>) numb.clone());
+			if(a.div(candidate).size() != 0 && b.div(candidate).size() != 0){
+				results.add(candidate);
+			}
+		}while(inc(numb));
+		//TODO: add checking here
+		
+		return results;
 	}
 }

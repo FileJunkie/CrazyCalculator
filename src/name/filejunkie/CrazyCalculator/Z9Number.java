@@ -359,12 +359,14 @@ public class Z9Number {
 			}
 		}while(inc(numb));
 		Set<Z9Number> res2 = new HashSet<Z9Number>();
+		Set<Z9Number> res3 = new HashSet<Z9Number>();
 		res2.addAll(results);
+		res3.addAll(results);
 		
 		boolean ok;
 		for(Z9Number candidate: res2){
 			ok = true;
-			for(Z9Number candidate2: results){
+			for(Z9Number candidate2: res3){
 				if(!candidate2.equals(candidate)){
 					if(candidate2.div(candidate).size() != 0){
 						ok = false;

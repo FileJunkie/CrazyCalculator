@@ -94,26 +94,22 @@ public class Z9Number {
 	
 	@SuppressWarnings("unchecked")
 	public Set<Z9Number> sub(Z9Number b){
-		ArrayList<Integer> numb1 = (ArrayList<Integer>)this.number.clone();
-		ArrayList<Integer> numb2 = (ArrayList<Integer>)b.number.clone();
-			
-		Set<ArrayList<Integer>> results = Z9Number.sub(numb1, numb2);
-		for(ArrayList<Integer> a: results){
-			for(int i = a.size() - 1; a.get(i) == 0 && i != 0; i--){
-				a.remove(i);
-			}
-		}
-		Set<Z9Number> result = new HashSet<Z9Number>();
-		for(ArrayList<Integer> res: results){
-			Z9Number r = new Z9Number(0);
-			while(res.size() > width){
-				res.remove(res.size() - 1);
-			}
-			r.number = res;
-			result.add(r);
-		}
+		Set<Z9Number> results = new HashSet<Z9Number>();
 		
-		return result;
+		ArrayList<Integer> numb = new ArrayList<Integer>();
+		for(int i = 0; i < width; i++){
+			numb.add(0);
+		}
+		do{
+			Z9Number candidate = new Z9Number((ArrayList<Integer>) numb.clone());
+			for(Z9Number res: b.add(candidate)){
+				if(res.equals(this)){
+					results.add(candidate);
+				}
+			}
+		}while(inc(numb));
+		
+		return results;
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -237,7 +233,7 @@ public class Z9Number {
 		boolean overflow = false;
 		
 		for(int resDigit: resDigits){
-			overflow = (resDigit < digit1 + digit2) || (digit1 != 0 && digit2 != 0 && resDigit == digit1 + digit2);
+			overflow = addOverflow(digit1, digit2);
 			ArrayList<Integer> numb1 = (ArrayList<Integer>)number1.clone();
 			ArrayList<Integer> numb2 = (ArrayList<Integer>)number2.clone();
 			numb1.remove(0);
@@ -273,59 +269,6 @@ public class Z9Number {
 		
 		return resNumbers;
 	}
-
-	@SuppressWarnings("unchecked")
-	private static Set<ArrayList<Integer>> sub(ArrayList<Integer> number1, ArrayList<Integer> number2){
-		while(number1.size() > number2.size()){
-			number2.add(0);
-		}
-		while(number1.size() < number2.size()){
-			number1.add(0);
-		}
-		
-		Integer digit1 = number1.get(0);
-		Integer digit2 = number2.get(0);
-		Set<Integer> resDigits = Z9Digit.sub(digit1, digit2);
-		Set<ArrayList<Integer>> resNumbers = new HashSet<ArrayList<Integer>>();
-		boolean overflow = false;
-		
-		for(int resDigit: resDigits){
-			overflow = (resDigit > digit1 - digit2) || (digit1 != 0 && digit2 != 0 && resDigit == digit1 + digit2);
-			ArrayList<Integer> numb1 = (ArrayList<Integer>)number1.clone();
-			ArrayList<Integer> numb2 = (ArrayList<Integer>)number2.clone();
-			numb1.remove(0);
-			numb2.remove(0);
-			if(numb1.size() != 0){
-				Set<ArrayList<Integer>> resultsHigh = Z9Number.sub(numb1, numb2);
-				if(overflow){
-					Set<ArrayList<Integer>> tmpSet = resultsHigh;
-					resultsHigh = new HashSet<ArrayList<Integer>>();
-					ArrayList<Integer> tmpArr = new ArrayList<Integer>();
-					tmpArr.add(1);
-					for(int i = 1; i < numb1.size(); i++){
-						tmpArr.add(0);
-					}
-					for(ArrayList<Integer> keyArr: tmpSet){
-						resultsHigh.addAll(Z9Number.sub(keyArr, tmpArr));
-					}
-				}
-				for(ArrayList<Integer> resHigh: resultsHigh){
-					resHigh.add(0, resDigit);
-					resNumbers.add(resHigh);
-				}
-			}
-			else{
-				ArrayList<Integer> tmp = new ArrayList<Integer>();
-				tmp.add(resDigit);
-				if(overflow){
-					tmp.add(1);
-				}
-				resNumbers.add(tmp);
-			}
-		}
-		
-		return resNumbers;
-	}
 	
 	private static Set<Z9Number> mul(ArrayList<Integer> numb1, Integer integer) {
 		Set<Z9Number> result = new HashSet<Z9Number>();
@@ -333,7 +276,7 @@ public class Z9Number {
 		for(int i = 0; i < numb1.size(); i++){
 			parts.add(new HashSet<Z9Number>());
 			for(int r: Z9Digit.mul(numb1.get(i), integer)){
-				if(r < numb1.get(i) * integer){
+				if(addOverflow(numb1.get(i), integer)){
 					r *= 10;
 				}
 				for(int j = 0; j < i; j++){
@@ -368,4 +311,19 @@ public class Z9Number {
 		return res;
 	}
 	
+	private static boolean addOverflow(int a, int b){
+		if( (a == 0) || (b == 0))
+			return false;
+		
+		if( (a == 6) || (b == 6))
+			return true;
+		if( (a == 8) || (b == 8))
+			return true;
+		if( (a == 4) || (b == 4))
+			return true;
+		if( (a == 7) || (b == 7))
+			return true;
+		
+		return false;
+	}
 }

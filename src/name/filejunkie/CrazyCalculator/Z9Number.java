@@ -358,7 +358,27 @@ public class Z9Number {
 				results.add(candidate);
 			}
 		}while(inc(numb));
-		//TODO: add checking here
+		Set<Z9Number> res2 = new HashSet<Z9Number>();
+		res2.addAll(results);
+		
+		boolean ok;
+		Z9Number victim = null;
+		for(Z9Number candidate: res2){
+			ok = true;
+			for(Z9Number candidate2: results){
+				if(!candidate2.equals(candidate)){
+					if(candidate2.div(candidate).size() != 0){
+						ok = false;
+						victim = candidate;
+						break;
+					}
+				}
+			}
+			if(!ok){
+				results.remove(victim);
+			}
+		}
+		
 		
 		return results;
 	}

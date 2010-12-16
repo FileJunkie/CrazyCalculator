@@ -33,7 +33,7 @@ public class Z9Digit {
 			addAnswers.get(1).get(8).add(8);
 			
 			addAnswers.get(2).get(2).add(3); addAnswers.get(2).get(2).add(7);
-			addAnswers.get(2).get(3).add(2); addAnswers.get(2).get(3).add(7);
+			addAnswers.get(2).get(3).add(7);
 			addAnswers.get(2).get(4).add(3);
 			addAnswers.get(2).get(5).add(3);
 			addAnswers.get(2).get(6).add(6); addAnswers.get(2).get(6).add(8);
@@ -85,7 +85,6 @@ public class Z9Digit {
 			
 			for(int i = 2; i < 9; i++){
 				if(i != 6 && i != 8){
-					mulAnswers.get(2).get(i).add(2);
 					mulAnswers.get(2).get(i).add(3);
 					mulAnswers.get(2).get(i).add(7);
 				}
@@ -98,7 +97,6 @@ public class Z9Digit {
 			for(int i = 3; i < 9; i++){
 				if(i != 6 && i != 8){
 					mulAnswers.get(3).get(i).add(2);
-					mulAnswers.get(3).get(i).add(3);
 					mulAnswers.get(3).get(i).add(7);
 				}
 				else{
@@ -110,12 +108,12 @@ public class Z9Digit {
 			mulAnswers.get(4).get(4).add(1);
 			mulAnswers.get(4).get(5).add(5);
 			mulAnswers.get(4).get(6).add(6); mulAnswers.get(4).get(6).add(8);
-			mulAnswers.get(4).get(7).add(2); mulAnswers.get(4).get(7).add(3); mulAnswers.get(4).get(7).add(7);   
+			mulAnswers.get(4).get(7).add(2); mulAnswers.get(4).get(7).add(3);   
 			mulAnswers.get(4).get(8).add(6); mulAnswers.get(4).get(8).add(8);
 			
 			mulAnswers.get(5).get(5).add(0);
 			mulAnswers.get(5).get(6).add(6); mulAnswers.get(5).get(6).add(8);
-			mulAnswers.get(5).get(7).add(2); mulAnswers.get(5).get(7).add(3); mulAnswers.get(5).get(7).add(7);   
+			mulAnswers.get(5).get(7).add(2); mulAnswers.get(5).get(7).add(3);   
 			mulAnswers.get(5).get(8).add(6); mulAnswers.get(5).get(8).add(8);
 			
 			for(int i = 6; i < 9; i++){
